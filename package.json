@@ -8,6 +8,9 @@
     "build:sass": "sass src/sass:public/style",
     "watch:eleventy": "eleventy --serve",
     "build:eleventy": "eleventy",
+    "build:sass:prod": "sass src/scss:public/style --style compressed",
+    "build:eleventy:prod": "ELEVENTY_ENV=production eleventy",
+    "build:prod": "npm run build:eleventy:prod & npm run build:sass:prod",
     "start": "npm-run-all build:sass --parallel watch:*",
     "build": "npm-run-all build:*"
   },
