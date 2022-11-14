@@ -2,31 +2,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;700&family=Inter:wght@300;400;700&family=Oi&family=Source+Sans+Pro:wght@300;400;700;900&family=Fredoka+One&display=swap');
 
 // $main-font: "Inter";
-// $main-font: "Inter Tight";
-$main-font: "Source Sans Pro";
+$main-font: "Inter Tight";
+// $main-font: "Source Sans Pro";
 
 $header-font: $main-font; 
-$logo-font: "Fredoka One";
+// $logo-font: "Fredoka One";
 // $logo-font: "Oi";
-// $logo-font: $main-font;
+$logo-font: $main-font;
 $body-font: $main-font;
 
 // raw colors
+$alice-blue: #DBE4EE;
 $black-coffee: #2F242C;
+$corn: #FFF275;
+$dark-sienna: #3D0814;
 $fern-green: #6C7D47;
 $ghost-white: #F0EFF4;
+$iceberg: #81A4CD;
 $international-orange-aerospace: #F05D23;
+$old-burgundy: #3B252C;
+$steel-blue: #3E7CB1;
+$yale-blue: #054A91;
 
 // assign colors to roles
 $background-color: $ghost-white;
+$background-alt: $alice-blue;
+// $background-alt: $corn;
 $text-color: $black-coffee;
+$text-alt: $dark-sienna;
 $text-color-inverted: $ghost-white;
-$accent-color: $international-orange-aerospace;
+// $accent-color: $international-orange-aerospace;
+$accent-color: $yale-blue;
+// $accent-color: $dark-sienna;
+// $accent-color: $corn;
+// $accent-secondary: $
 
 // various shared ui styling
 $common-border-radius: 6px;
-$common-border: 2px;
-$common-line-height: 2rem;
+$common-border: 3px;
+$common-line-height: 2.4rem;
 $common-margin-bottom: 1.3rem;
 $common-padding: 1.2rem;
 $common-transition-time: 150ms;
@@ -43,13 +57,34 @@ $common-transition-time: 150ms;
   transition: 
     background-color $common-transition-time,
     border $common-transition-time,
+    box-shadow $common-transition-time,
     color $common-transition-time,
+    filter $common-transition-time,
     padding $common-transition-time;
 }
 
 @mixin margin-reset {
   margin: 0;
   margin-bottom: $common-margin-bottom;
+}
+
+@mixin responsive-widths {
+  //375px
+  width: 100%;
+
+  //768px
+  @media (min-width: 768px) {
+    // margin: 0 auto;
+    width: 768px;
+  }
+  //1280px
+  @media (min-width: 1280px) {
+    // width: 1280px;
+  }
+  //1920px
+  @media (min-width: 1920px) {
+    // width: 1920px;
+  }
 }
 
 * {
@@ -64,10 +99,12 @@ html {
 
 h1, h2, h3 {
   @include common-transitions();
+  color: $text-alt;
   // background-color: $accent-color;
   margin: 0;
   margin-bottom: $common-margin-bottom;
-  // border-bottom: 1px solid $accent-color;
+  border-bottom: $common-border solid $background-alt;
+  padding-bottom: .5rem;
 }
 
 h1 {
@@ -84,19 +121,41 @@ h3 {
 
 a:not(.main-nav-link, .logo-link) {
   @include common-transitions();
-  border-bottom: 1px solid $accent-color;
+  // border-radius: $common-border-radius;
+  border-bottom: 2px solid $background-alt;
   color: $accent-color;
+  margin: 0 -.1em;
+  padding: .15em .25em;
   text-decoration: none;
 
   &:hover {
-    border-bottom: 4px solid $accent-color;
+    background-color: $background-alt;
+    // border: 2px solid $background-alt;
+    border-radius: $common-border-radius;
+    // border-bottom: 4px solid $accent-color;
     // padding-bottom: 0px;
-    // color: $accent-color;
+    // color: $text-alt;
   }
+}
+
+ul:not(.main-nav), ol {
+  @include margin-reset();
+  // border-left: $common-border solid background-alt;
+  background-color: $background-alt;
+  border-radius: $common-border-radius;
+  padding: .6rem 2.4rem;
+  // padding-left: 2.4rem;
 }
 
 li {
   @include body-font();
+  line-height: 2.4rem;
+  padding-left: .4rem;
+}
+
+li:not(.main-nav-list-item)::marker {
+  color: $accent-color;
+  font-weight: bold;
 }
 
 p {
@@ -105,10 +164,12 @@ p {
 }
 
 header {
+  // @include responsive-widths();
   align-items: center;
   background-color: $background-color;
   // background-color: $text-color;
   box-shadow: 0px 4px 8px $background-color;
+  // border-top: 8px solid $text-color;
   display: flex;
   // flex-direction: column;
   justify-content: space-between;
@@ -117,18 +178,32 @@ header {
   width: 100vw;
 }
 
+.header-wrapper{
+  margin: 0 auto;
+  @include responsive-widths();
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 #header-logo {
-  font-family: $logo-font;
-  font-size: 3rem;
-  margin: 0;
+  font-family: "Inter";
+  font-size: 1.8rem;
+  margin: .5rem 0 0;
   font-weight: bold;
   // width: 100%;
   // display: inline;
 }
 
 .logo-link{
-  color: $accent-color;
+  // color: $accent-color;
+  color: $text-alt;
   text-decoration: none;
+
+  &:hover {
+    @include common-transitions();
+
+  }
 }
 
 .main-nav {
@@ -173,15 +248,29 @@ body {
 }
 
 #content {
+  @include responsive-widths();
   margin: 7.5rem auto 0;
-  width: 720px;
+}
+
+#content-controls {
+  display: none;
+
+
+  background-color: $text-color;
+  color: $accent-color;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: calc(100vw - 768px);
 }
 
 button {
   @include common-transitions();
   
   background-color: transparent;
-  border: $common-border solid $accent-color;
+  // background-color: $background-alt;
+  border: $common-border solid $background-alt;
   border-radius: $common-border-radius;
   color: $accent-color;
   font-family: $main-font;
@@ -189,8 +278,16 @@ button {
   padding: .75rem 1rem;
 
   &:hover {
-    background-color: $accent-color;
+    // background-color: $accent-color;
+    background-color: $background-alt;
+    border-color: $background-alt;
+    // border-color: $iceberg;
+    // box-shadow: 0px 4px 15px rgba(0,0,0,0.05);
     cursor: pointer;
-    color: $text-color-inverted;
+    // color: $text-color-inverted;
+  }
+
+  &:active {
+    filter: opacity(.8);
   }
 }
