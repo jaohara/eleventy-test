@@ -1,14 +1,196 @@
-$header-color: #32a856;
+// Google fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;700&family=Inter:wght@300;400;700&family=Oi&family=Source+Sans+Pro:wght@300;400;700;900&family=Fredoka+One&display=swap');
+
+// $main-font: "Inter";
+// $main-font: "Inter Tight";
+$main-font: "Source Sans Pro";
+
+$header-font: $main-font; 
+$logo-font: "Fredoka One";
+// $logo-font: "Oi";
+// $logo-font: $main-font;
+$body-font: $main-font;
+
+// raw colors
+$black-coffee: #2F242C;
+$fern-green: #6C7D47;
+$ghost-white: #F0EFF4;
+$international-orange-aerospace: #F05D23;
+
+// assign colors to roles
+$background-color: $ghost-white;
+$text-color: $black-coffee;
+$text-color-inverted: $ghost-white;
+$accent-color: $international-orange-aerospace;
+
+// various shared ui styling
+$common-border-radius: 6px;
+$common-border: 2px;
+$common-line-height: 2rem;
+$common-margin-bottom: 1.3rem;
+$common-padding: 1.2rem;
+$common-transition-time: 150ms;
+
+// mixins
+@mixin body-font {
+  font-family: $body-font;
+  font-size: 1.1rem;
+  font-weight: normal;
+  line-height: $common-line-height;
+}
+
+@mixin common-transitions {
+  transition: 
+    background-color $common-transition-time,
+    border $common-transition-time,
+    color $common-transition-time,
+    padding $common-transition-time;
+}
+
+@mixin margin-reset {
+  margin: 0;
+  margin-bottom: $common-margin-bottom;
+}
+
+* {
+  box-sizing: border-box;
+}
 
 html {
-  // color: #efefef;
+  background-color: $background-color;
+  color: $text-color;
+  font-family: $main-font;
+}
+
+h1, h2, h3 {
+  @include common-transitions();
+  // background-color: $accent-color;
+  margin: 0;
+  margin-bottom: $common-margin-bottom;
+  // border-bottom: 1px solid $accent-color;
 }
 
 h1 {
-  // color: #32a856;
-  // color: $header-color;
+  font-size: 2.2rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+}
+
+a:not(.main-nav-link, .logo-link) {
+  @include common-transitions();
+  border-bottom: 1px solid $accent-color;
+  color: $accent-color;
+  text-decoration: none;
+
+  &:hover {
+    border-bottom: 4px solid $accent-color;
+    // padding-bottom: 0px;
+    // color: $accent-color;
+  }
+}
+
+li {
+  @include body-font();
+}
+
+p {
+  @include body-font();
+  @include margin-reset();
+}
+
+header {
+  align-items: center;
+  background-color: $background-color;
+  // background-color: $text-color;
+  box-shadow: 0px 4px 8px $background-color;
+  display: flex;
+  // flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+}
+
+#header-logo {
+  font-family: $logo-font;
+  font-size: 3rem;
+  margin: 0;
+  font-weight: bold;
+  // width: 100%;
+  // display: inline;
+}
+
+.logo-link{
+  color: $accent-color;
+  text-decoration: none;
+}
+
+.main-nav {
+  list-style-type: none;
+  display: inline;
+  padding: 0;
+
+  & li {
+    display: inline;
+
+    a { 
+      text-decoration: none;
+    }
+  }
+}
+
+.main-nav-list-item {
+  display: inline;
+  margin: 0 1rem;
+}
+
+.main-nav-link {
+  @include common-transitions();
+  color: $text-color;
+  font-weight: bold;
+  text-decoration: none;
+
+  &:hover {
+    color: $accent-color;
+  }
 }
 
 body {
-  // background: #21252b;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  width: 100vw;
+
+  & > * {
+    padding: $common-padding;
+  }
+}
+
+#content {
+  margin: 7.5rem auto 0;
+  width: 720px;
+}
+
+button {
+  @include common-transitions();
+  
+  background-color: transparent;
+  border: $common-border solid $accent-color;
+  border-radius: $common-border-radius;
+  color: $accent-color;
+  font-family: $main-font;
+  font-weight: bold;
+  padding: .75rem 1rem;
+
+  &:hover {
+    background-color: $accent-color;
+    cursor: pointer;
+    color: $text-color-inverted;
+  }
 }
