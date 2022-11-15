@@ -7,6 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ 'style/style.css' | url}} ">
+
+  <!-- TODO: Move to an external script -->
+  <script>
+    function toggleDarkMode (e) {
+      e.preventDefault();
+      document.getElementsByTagName("html")[0].classList.toggle("dark");
+    };
+  </script>
 </head>
 <body>
 
@@ -18,8 +26,13 @@
 
       <ul class="main-nav">
         <li class="main-nav-list-item">
-          <a class="main-nav-link" href="/">Projects</a>
+          <a class="main-nav-link" href="/"
+            onClick="toggleDarkMode(event)"
+          >Toggle</a>
         </li>
+        <li class="main-nav-list-item">
+          <a class="main-nav-link" href="/">Projects</a>
+        </li>        
         <li class="main-nav-list-item">
           <a class="main-nav-link" href="/">Contact</a>
         </li>
