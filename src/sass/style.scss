@@ -131,10 +131,14 @@ a:not(.main-nav-link, .logo-link) {
   &:hover {
     background-color: $background-alt;
     // border: 2px solid $background-alt;
+    color: $text-color;
     border-radius: $common-border-radius;
     // border-bottom: 4px solid $accent-color;
     // padding-bottom: 0px;
-    // color: $text-alt;
+  }
+
+  &:active {
+    color: $accent-color;
   }
 }
 
@@ -233,9 +237,9 @@ header {
 
 .main-nav-link {
   @include common-transitions();
+  color: $accent-color;
   display: inline-block;
   // background-color: $background-alt;
-  color: $text-color;
   font-weight: bold;
   margin: -1rem -1.2rem;
   padding: .4rem 1.2rem;
@@ -244,6 +248,10 @@ header {
   &:hover {
     background-color: $background-alt;
     border-radius: $common-border-radius;
+    color: $text-color;
+  }
+
+  &:active {
     color: $accent-color;
   }
 }
@@ -296,10 +304,11 @@ button {
     // border-color: $iceberg;
     // box-shadow: 0px 4px 15px rgba(0,0,0,0.05);
     cursor: pointer;
-    // color: $text-color-inverted;
+    color: $text-color;
   }
 
   &:active {
+    color: $accent-color;
     filter: opacity(.8);
   }
 }
