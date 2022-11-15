@@ -38,7 +38,7 @@ $accent-color: $yale-blue;
 // $accent-secondary: $
 
 // various shared ui styling
-$common-border-radius: 6px;
+$common-border-radius: 8px;
 $common-border: 3px;
 $common-line-height: 2.4rem;
 $common-margin-bottom: 1.3rem;
@@ -221,17 +221,29 @@ header {
 }
 
 .main-nav-list-item {
+  @include common-transitions();
+  // background-color: $background-alt;
   display: inline;
+  text-align: center;
   margin: 0 1rem;
+  
+  &:hover {
+  }
 }
 
 .main-nav-link {
   @include common-transitions();
+  display: inline-block;
+  // background-color: $background-alt;
   color: $text-color;
   font-weight: bold;
+  margin: -1rem -1.2rem;
+  padding: .4rem 1.2rem;
   text-decoration: none;
-
+  
   &:hover {
+    background-color: $background-alt;
+    border-radius: $common-border-radius;
     color: $accent-color;
   }
 }
@@ -289,5 +301,21 @@ button {
 
   &:active {
     filter: opacity(.8);
+  }
+}
+
+footer {
+  align-items: center;
+  background-color: $background-alt;
+  color: $text-color;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  
+  & p {
+    // font-weight: bold;
+    font-size: .8rem;
+    margin: 0;
   }
 }
