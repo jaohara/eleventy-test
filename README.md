@@ -1,2 +1,2 @@
-# eleventy-test
-A repository to test out 11ty.
+# jaohara.github.io
+A repository for the code for my github portfolio.
