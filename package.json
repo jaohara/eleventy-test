@@ -26,7 +26,11 @@
   "homepage": "https://github.com/jaohara/eleventy-test#readme",
   "devDependencies": {
     "@11ty/eleventy": "^1.0.2",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^4.2.0",
     "npm-run-all": "^4.1.5",
     "sass": "^1.56.1"
+  },
+  "dependencies": {
+    "eleventy-plugin-feathericons": "^1.0.1"
   }
 }

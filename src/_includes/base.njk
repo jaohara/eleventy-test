@@ -7,22 +7,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ 'style/style.css' | url}} ">
-
+  <script src="{{ 'js/index.js' | url }}"></script>
   <!-- TODO: Move to an external script -->
-  <script>
+  <!-- <script>
     function toggleDarkMode (e) {
       e.preventDefault();
       document.getElementsByTagName("html")[0].classList.toggle("dark");
     };
-  </script>
+  </script> -->
 </head>
 <body>
+  <div id="image-box" class="" onClick="toggleImageBox(event)">
+    {# <img src="" alt="" /> #}
+    <img id="image-box-image" src="img/screenshot-2.png" alt="" />
+  </div>
 
   <header>
     <div class="header-wrapper">
       <h1 id="header-logo">
-        <a href="/" class="logo-link">John O'Hara</a>
+        <a href=" {{ '/' | url }}" class="logo-link">{% feather "terminal" %} 
+        j<span class="header-logo-accent">a</span>ohara</a>
       </h1>
+
+      <!--
+
+
+
+
+
+
+
+
+        TODO: Move .small-nav structure to within #content, but hidden behind the header in 
+          z-space. When it's toggled to active, increase the padding on #content to slide it in
+          to view.
+
+
+
+
+
+
+      -->
+
+      <!-- Is this the best way to handle this? -->
+      <ul class="small-nav">
+        <li class="small-nav-list-item main-nav-link-wrapper">
+          <a class="small-nav-link {{ 'active' if '/John' in page.url  }}" href="{{ '/John/' | url }}">John's Page</a>
+        </li>        
+        <li class="small-nav-list-item main-nav-link-wrapper">
+          <a class="small-nav-link {{ 'active' if '/Karen' in page.url  }}" href="{{ '/Karen/' | url }}">Karen's Page</a>
+        </li>
+        <li class="small-nav-list-item main-nav-link-wrapper">
+          <a class="small-nav-link {{ 'active' if '/Ayla' in page.url  }}" href="{{ '/Ayla/' | url }}">Ayla's Page</a>
+        </li>
+      </ul>
 
       <ul class="main-nav">
         <li class="main-nav-list-item">
@@ -50,6 +88,14 @@
   <footer>
     <p>
       &copy; 2022 John O'Hara
+    </p>
+
+    <p>
+      Built using <a href="https://feathericons.com/">Feather Icons {% feather "feather" %}</a>
+    </p>
+
+    <p>
+      <a href="https://github.com/jaohara/">jaohara {% feather "github" %}</a>
     </p>
   </footer>
 </body>

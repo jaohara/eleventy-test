@@ -9,3 +9,10 @@
   {{content}}
 </span>
 {% endmacro %}
+
+{# TODO: Fix this implementation and the image-box #}
+{% macro image(src, alt)%}
+<div class="image-wrapper">
+  <img src="{{src}}" alt="{{alt}}" class="zoomable-image"/>
+</div>
+{% endmacro %}
