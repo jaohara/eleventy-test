@@ -7,14 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>John O&#39;Hara</title>
   <link rel="stylesheet" href="style/style.css ">
-  <script src="js/index.js"></script>
-  <!-- TODO: Move to an external script -->
-  <!-- <script>
-    function toggleDarkMode (e) {
-      e.preventDefault();
-      document.getElementsByTagName("html")[0].classList.toggle("dark");
-    };
-  </script> -->
 </head>
 <body>
   <div id="image-box" class="" onClick="toggleImageBox(event)">
@@ -22,7 +14,9 @@
     <img id="image-box-image" src="img/screenshot-2.png" alt="" />
   </div>
 
-  <header>
+  
+
+  <header class="scroll-at-top" id="page-header">
     <div class="header-wrapper">
       <h1 id="header-logo">
         <a href=" /" class="logo-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-terminal feather-x"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg> 
@@ -78,13 +72,75 @@
     </div>
   </header>
 
-  <div id="content">
-    <div id="content-controls">
+  <div id="page-content">
+    <div id="page-controls">
       Test
     </div>
-    <h1>Header 1</h1>
-<h2>Header 2</h2>
-<h3>Header 3</h3>
+    <div id="hero-container">
+  <canvas id="hero-background-canvas" class="hidden" width="400" height="300"></canvas>
+  <div id="hero-content-wrapper" class="hidden">
+    <div id="hero-intro">
+      <div id="hero-image-wrapper">
+        <img id="hero-image" src="assets/img/Headshot.webp" alt="John O'Hara Headshot" />
+      </div>    
+      <div id="hero-text">
+        <h1>Hi - I'm <span class="hero-name">John O'Hara</span>, a Seattle-based Developer.</h1>
+        <p>I make things for the web, primarily using tools such as React, JavaScript, TypeScript, and SCSS.</p>
+        <p>When I'm not working at my computer I enjoy riding bicycles, playing guitar, and putting way too much thought into coffee.</p>
+      </div>
+    </div>
+    <div id="hero-technology-container">
+      <div class="hero-technology-card javascript"><img class="hero-technology-image" src="assets/img/javascript-logo.png" /></div>
+      <div class="hero-technology-card typescript"><img class="hero-technology-image"src="assets/img/typescript-logo.svg" /></div>
+      <div class="hero-technology-card react"><img class="hero-technology-image" src="assets/img/react-logo.svg" /></div>
+      <div class="hero-technology-card sass"><img class="hero-technology-image" src="assets/img/sass-logo.svg" /></div>
+    </div>
+  </div>
+  <div id="hero-arrow">
+    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-down-circle feather-x"><circle cx="12" cy="12" r="10"></circle><polyline points="8 12 12 16 16 12"></polyline><line x1="12" y1="8" x2="12" y2="16"></line></svg>  
+  </div>
+</div>
+<div class="content-container"><div id="projects-wrapper" class="content-wrapper">
+<h1>Generic Content</h1>
+<p>This is a generic block of content. Below it I'm going to mess around with a div that has a generative canvas background.</p>
+</div></div>
+<div class="content-container container-alt-bg"><div class="content-wrapper">
+<h1>Can I mix HTML in here?</h1>
+<p>What happens if I do something <strong>like this</strong>?</p>
+<h1>A few test tags</h1>
+<p>I need to remember to make a few basic tags from <code>&lt;span&gt;</code>s combined with one of those 11ty macros in the in the <code>component.ui</code> file. What are the tags that I need to make?</p>
+<ul>
+<li>Date tag</li>
+<li>topic tag?</li>
+</ul>
+<h2>Date tag</h2>
+<p>Alright, here's an inline example of a date tag from
+<span class="date-tag">
+<span class="date-tag-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar feather-x"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+</span>
+<span class="date-tag-string">
+Nov. 20th, 2022
+</span>
+</span>
+as well as one on another line:</p>
+<span class="date-tag">
+  <span class="date-tag-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar feather-x"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+  </span>
+  <span class="date-tag-string">
+    11-20-22
+  </span>
+</span>
+<span class="date-tag">
+  <span class="date-tag-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar feather-x"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+  </span>
+  <span class="date-tag-string">
+    Nov. 20th, 2022
+  </span>
+</span>
+<h1>First Level Header</h1>
 <p>This is a paragraph of text. I'm typing some stuff out so that the paragraph has some content.</p>
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, accusantium <a href="">debitis laboriosam</a> quod nisi nulla incidunt ut officiis quis, animi obcaecati ratione fuga pariatur provident nobis maiores labore <a href="">placeat hic!</a></p>
 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum non eaque atque consectetur. Sint repudiandae suscipit, cum at excepturi enim cupiditate sit unde provident voluptas eaque optio illum quisquam tenetur numquam minima nostrum nisi a libero quibusdam sed vero pariatur.</p>
@@ -95,6 +151,7 @@
 <li>But just enough</li>
 <li>To demonstrate these lists</li>
 </ul>
+<h1>What about ordered lists?</h1>
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi atque suscipit quos facilis non, vitae ducimus harum eveniet in iste aliquam nemo accusantium temporibus cupiditate magni velit! Id, nostrum. <a href="">Consectetur cum deserunt</a> perferendis dolorum quo sunt adipisci voluptate nobis nostrum aliquid in dolore asperiores necessitatibus porro excepturi ipsa, doloremque vel ullam maiores autem perspiciatis sequi architecto.</p>
 <ol>
 <li>Make a List</li>
@@ -104,9 +161,11 @@
 <li>Admire your list</li>
 </ol>
 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus debitis tempore minus accusamus est ipsa cum nemo possimus nulla cumque.</p>
+<h1>What do buttons look like?</h1>
 <button class="" type="button">
   Another Test Button!
 </button>
+</div></div>
 
   </div>
 
@@ -124,4 +183,5 @@
     </p>
   </footer>
 </body>
+<script src="js/index.js"></script>
 </html>
