@@ -7,14 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
   <link rel="stylesheet" href="{{ 'style/style.css' | url}} ">
-  <script src="{{ 'js/index.js' | url }}"></script>
-  <!-- TODO: Move to an external script -->
-  <!-- <script>
-    function toggleDarkMode (e) {
-      e.preventDefault();
-      document.getElementsByTagName("html")[0].classList.toggle("dark");
-    };
-  </script> -->
 </head>
 <body>
   <div id="image-box" class="" onClick="toggleImageBox(event)">
@@ -22,7 +14,9 @@
     <img id="image-box-image" src="img/screenshot-2.png" alt="" />
   </div>
 
-  <header>
+  {# <canvas id="bg" width="100vw" height="100vh"></canvas> #}
+
+  <header class="scroll-at-top" id="page-header">
     <div class="header-wrapper">
       <h1 id="header-logo">
         <a href=" {{ '/' | url }}" class="logo-link">{% feather "terminal" %} 
@@ -78,8 +72,8 @@
     </div>
   </header>
 
-  <div id="content">
-    <div id="content-controls">
+  <div id="page-content">
+    <div id="page-controls">
       Test
     </div>
     {{ content | safe }}
@@ -99,4 +93,5 @@
     </p>
   </footer>
 </body>
+<script src="{{ 'js/index.js' | url }}"></script>
 </html>

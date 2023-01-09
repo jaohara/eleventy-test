@@ -2,13 +2,14 @@
 
 // Google fonts
 // TODO: Remove unused fonts!
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;700&family=Inter:wght@300;400;700&family=Oi&family=Source+Sans+Pro:wght@300;400;700;900&family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;700&family=Inter:wght@300;400;700&family=JetBrains+Mono&family=Oi&family=Source+Sans+Pro:wght@300;400;700;900&family=Fredoka+One&display=swap');
 
 
 // $main-font: "Inter";
 $main-font: "Inter Tight";
 // $main-font: "Source Sans Pro";
 
+$mono-font: "JetBrains Mono";
 $header-font: $main-font; 
 $logo-font: $main-font;
 $body-font: $main-font;
@@ -16,7 +17,7 @@ $body-font: $main-font;
 // raw colors
 $alice-blue: #DBE4EE;
 $black-coffee: #2F242C;
-$blue-jeans: #3FABF8;
+$blue-jeans: #208adb;
 $feldgrau: #586F6B;
 $french-blue: #1278C1;
 $green-pigment: #55A05B;
@@ -37,6 +38,12 @@ $yale-blue: #054A91;
 
 $image-box-color: rgba(0,0,0,0.32);
 
+// technology colors
+$ts-color: #3178c6;
+$js-color: #f5dd30;
+$sass-color: #cd6799;
+$react-color: #61dafb;
+
 /*
   I should expect the following: 
     - accent-color
@@ -49,7 +56,8 @@ $image-box-color: rgba(0,0,0,0.32);
 */
 $themes: (
   light: (
-    accent-color: $french-blue,
+    accent-color: $blue-jeans,
+    // accent-color: $french-blue,
     // accent-color: $red-pigment,
     accent-secondary: $green-pigment,
     background-color: $ghost-white,
@@ -63,7 +71,9 @@ $themes: (
     accent-color: $blue-jeans,
     accent-secondary: $peach,
     background-alt: $space-cadet,
+    // background-alt: $oxford-blue,
     background-color: $oxford-blue,
+    // background-color: $space-cadet,
     text-color: $ghost-white,
     text-alt: $alice-blue,
     text-color-inverted: $black-coffee,
@@ -92,6 +102,7 @@ $common-large-margin: 4rem;
 $common-margin-bottom: 1.3rem;
 $common-padding: 1.2rem;
 $common-transition-time: 150ms;
+$canvas-background-transition-time: 8000ms;
 
 // ======
 // mixins
@@ -117,6 +128,19 @@ $common-transition-time: 150ms;
   }
 }
 
+@mixin regular-background-for-inline-item {
+  @include common-transitions();
+  background-color: map.get($themes, "light", "background-color");
+  border-radius: $common-border-radius;
+  border: 2px solid map.get($themes, "light", "background-color");
+  padding: .15em .2em;
+  
+  .dark & {
+    background-color: map.get($themes, "dark", "background-color");
+    border: 2px solid map.get($themes, "dark", "background-color");
+  }
+}
+
 @mixin body-font {
   font-family: $body-font;
   font-size: 1.1rem;
@@ -134,6 +158,14 @@ $common-transition-time: 150ms;
     filter $common-transition-time,
     opacity $common-transition-time,
     padding $common-transition-time;
+}
+
+@mixin hero-canvas-background-transitions() {
+  transition: 
+    filter $canvas-background-transition-time,
+    opacity $canvas-background-transition-time,
+    transform $canvas-background-transition-time;
+
 }
 
 @mixin color-transitions() {
@@ -156,6 +188,15 @@ $common-transition-time: 150ms;
     padding 500ms,
     transform $common-transition-time,
     width $common-transition-time;
+}
+
+@mixin hero-transitions() {
+  $hero-transition-params: 350ms ease-in;
+  transition: 
+    box-shadow $hero-transition-params,
+    filter $hero-transition-params,
+    opacity $hero-transition-params,
+    transform $hero-transition-params;
 }
 
 @mixin hide-nav-item-above-screen {
@@ -232,7 +273,7 @@ h1:not(#header-logo), h2, h3 {
   }
 }
 
-#content h1, h2, h3 {
+#page h1, h2, h3 {
   margin-top: 3rem;
 }
 
@@ -250,6 +291,7 @@ h3 {
 
 code:not( pre > code) {
   @include alt-background-for-inline-item();
+  font-family: $mono-font;
   font-size: 1rem;
   font-weight: normal;
   color: map.get($themes, "light", "accent-color");
@@ -257,6 +299,10 @@ code:not( pre > code) {
   .dark & {
     color: map.get($themes, "dark", "accent-color");
   }
+}
+
+.container-alt-bg code:not(pre > code) {
+  @include regular-background-for-inline-item();
 }
 
 pre {
@@ -282,7 +328,6 @@ a:not(.main-nav-link, .logo-link) {
     border-bottom: 2px solid map.get($themes, "dark", "background-alt");
     color: map.get($themes, "dark", "accent-color");
   }
-
   
   &:hover {
     @include alt-background-for-inline-item();
@@ -291,6 +336,10 @@ a:not(.main-nav-link, .logo-link) {
     .dark & {
       color: map.get($themes, "dark", "text-color");;
     }
+  }
+
+  .container-alt-bg &:hover {
+    @include regular-background-for-inline-item();
   }
 
   &:active {
@@ -303,6 +352,7 @@ ul:not(.main-nav, .small-nav), ol {
   // border-left: $common-border solid background-alt;
   // background-color: $background-alt;
   border-radius: $common-border-radius;
+  margin-bottom: 0;
   padding: .6rem 2.4rem;
   // padding-left: 2.4rem;
 }
@@ -367,7 +417,7 @@ p {
   width: 100%;
 }
 
-img:not(#image-box-image) {
+img:not(#image-box-image, #hero-image, .hero-technology-image) {
   @include common-transitions-with-transform();
   width: 100%;
 
@@ -388,15 +438,56 @@ img:not(#image-box-image) {
 
 }
 
+.date-tag {
+  @include common-transitions();
+  @include alt-background-for-inline-item();
+  background-color: map.get($themes, "light", "background-alt");
+  border-radius: 2rem;
+  color: map.get($themes, "light", "accent-color");
+  font-size: .8rem;
+  // TODO: Do I want to use $main-font instead?
+  font-family: $mono-font;
+  // font-family: $main-font;
+  margin-right: .25rem;
+  padding-left: .25rem;
+  padding-right: .25rem;
+  
+  .dark & {
+    background-color: map.get($themes, "dark", "background-alt");
+    color: map.get($themes, "dark", "accent-color");
+  }
+}
+
+.container-alt-bg .date-tag {
+  @include regular-background-for-inline-item();
+  // background-color: map.get($themes, "light", "background-color");
+
+  // .dark & {
+  //   background-color: map.get($themes, "dark", "background-");
+  // }
+}
+
+.date-tag-icon  svg {
+  // this is a little magic - I'm not a fan of this
+  transform: scale(.6) translateY(.7rem);
+}
+
+.date-tag-string {
+  height: 1rem;
+}
+
 // ==============
 // header styling
 // ==============
+$hero-item-border: .5rem solid map.get($themes, "light", "background-alt");
+$hero-item-border-dark: .5rem solid map.get($themes, "dark", "background-alt");
+
 header {
   @include common-transitions();
   // @include responsive-widths();
   align-items: center;
   background-color: map.get($themes, "light", "background-color");
-  box-shadow: 0px 4px 8px map.get($themes, "light", "background-color");
+  // box-shadow: 0px 4px 8px map.get($themes, "light", "background-color");
   // border-top: 8px solid map.get($themes, "light", "accent-color");
   display: flex;
   // flex-direction: column;
@@ -408,8 +499,16 @@ header {
   
   .dark & {
     background-color: map.get($themes, "dark", "background-color");
-    box-shadow: 0px 4px 8px map.get($themes, "dark", "background-color");
-  
+    // box-shadow: 0px 4px 8px map.get($themes, "dark", "background-color");
+
+  }
+
+  &.scroll-at-top {
+    background-color: transparent;
+    
+    .dark & {
+      background-color: transparent;
+    }
   }
 }
 
@@ -432,10 +531,179 @@ header {
 #header-logo {
   font-family: "Inter";
   font-size: 1.8rem;
-  margin: .5rem 0 0;
+  // margin: .5rem 0 0;
   font-weight: bold;
   // width: 100%;
   // display: inline;
+}
+
+#hero-container {
+  @include common-transitions();
+  align-items: center;
+  background-color: map.get($themes, "light", "background-alt");
+  display: flex;
+  // display: none;
+  flex-direction: column;
+  // max-height: 100vh;
+  justify-content: center;
+  min-height: 100vh;
+  // padding: $common-padding;
+  // padding-top: $body-top-padding;
+  width: 100vw;
+  
+  .dark & {
+    background-color: map.get($themes, "dark", "background-alt");
+  }
+}
+
+#hero-content-wrapper {
+  @include hero-transitions();
+  // todo: fix to be responsive
+  background: map.get($themes, "light", "background-color");
+  border-radius: $common-border-radius;
+  opacity: 100%;
+  padding: 4rem 0;
+  z-index: 1;
+
+  //TODO: Do I like this? there aren't shadows in other places, it kind of ruins the flat 
+  //  color palette.
+  // box-shadow: 0px 16px 48px rgba(0,0,0,.1);
+  
+  width: 80%;
+  //TODO: Control max widths responsively
+  max-width: 1024px;
+  
+  .dark & {
+    background: map.get($themes, "dark", "background-color");
+  }
+
+  &.hidden {
+    box-shadow: 0px 4px 12px rgba(0,0,0,.1);
+    opacity: 0%;
+  }
+}
+
+
+#hero-intro {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+
+  // TODO: maybe adjust these based on size?
+  // padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.hero-name {
+  @include common-transitions();
+  color: map.get($themes, "light", "accent-color");
+
+  .dark & {
+    color: map.get($themes, "dark", "accent-color");
+  }
+}
+
+#hero-image-wrapper {
+  // TODO: Include responsive sizing breakpoints
+  align-self: center;
+  width: 25%;
+}
+
+
+#hero-image {
+  @include common-transitions();
+  // border-radius: 500px;
+  border-radius: 2.5rem;
+  border: $hero-item-border;
+  width: 100%;
+
+
+  .dark & {
+    border: $hero-item-border-dark;
+  }
+}
+
+#hero-text {
+  max-width: 50%;
+}
+
+#hero-arrow {
+  color: map.get($themes, "light", "background-color");
+  position: absolute;
+  top: 85vh;
+  // color: map.get($themes, "light", "background-alt");
+}
+
+#hero-background-canvas {
+  @include hero-canvas-background-transitions();
+  left: 0;
+  opacity: .85;
+  position: absolute;
+  top: 0;
+  z-index: 0;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+#hero-technology-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  width: 75%; // TODO: change this with responsive width pass
+}
+
+.hero-technology-card {
+  @include common-transitions();
+  align-items: center;
+  background: #FF0000;
+  // border-radius: $common-border-radius;
+  border: $hero-item-border;
+  border-radius: 2.5rem;
+  display: flex;
+  justify-content: center;
+  max-height: 128px;
+  min-height: 128px;
+  max-width: 128px;
+  min-width: 128px;
+  object-fit: cover;
+
+
+  .dark & {
+    border: $hero-item-border-dark;
+  }
+
+  img {
+    max-height: 128px;
+    // min-height: 96px;
+    // max-width: 128px;
+    // min-width: 96px; 
+    width: 80%;
+  }
+
+  &.javascript {
+    background: $js-color;
+  }
+  
+  &.typescript {
+    background: $ts-color;
+  }
+  
+  &.react {
+    background: $react-color;
+  }
+  
+  &.sass {
+    background: $sass-color;
+  }
+
+  &.react img, &.sass img {
+    filter: brightness(2.5);
+  }
+
+  &:hover {
+  }
 }
 
 .logo-link{
@@ -450,11 +718,16 @@ header {
     color: map.get($themes, "dark", "text-color");
   }
 
+  .container-alt-bg & {
+    color: map.get($themes, "light", "background-color");
+  }
+
   &:hover {
     // @include common-transitions();
     color: map.get($themes, "light", "accent-color");
     // @include accent-border();
     cursor: pointer;
+    
     
     .dark & {
       color: map.get($themes, "dark", "accent-color");
@@ -470,6 +743,7 @@ header {
     }
   }
 }
+
 
 // ===========
 // nav styling
@@ -567,20 +841,35 @@ header {
 
 .main-nav-link {
   @include common-transitions();
-  border: 2px solid transparent;
+  // border: 2px solid transparent;
+  border-radius: $common-border-radius;
   color: map.get($themes, "light", "text-color");
   display: inline-block;
   margin: -1rem 0;
-  padding: .4rem ;
+  padding: .4rem 1.2rem;
   text-decoration: none;
   
   .dark & {
     color: map.get($themes, "dark", "text-color");
   }
+
   
   &:hover {
-    @include accent-border();
+    // @include accent-border();
     color: map.get($themes, "light", "accent-color");
+    background: map.get($themes, "light", "background-alt");
+
+    .dark & {
+      background: map.get($themes, "dark", "background-alt");
+    }
+    
+    .scroll-at-top & {
+      background: map.get($themes, "light", "background-color");
+      
+      .dark & {
+        background: map.get($themes, "dark", "background-color");
+      }
+    }
   }
   
   &:active {
@@ -647,8 +936,8 @@ header {
 // ============
 // body styling
 // ============
+$body-top-padding: 7.5rem;
 body {
-  $body-top-padding: 7.5rem;
   $body-offset-menu-active: rem;
 
   display: flex;
@@ -657,31 +946,62 @@ body {
   margin: 0;
   min-height: 100vh;
   padding: 0;
-  padding-top: $body-top-padding;
+  // padding-top: $body-top-padding;
   position: relative;
   transform: none;
   width: 100vw;
 
-  & > *:not(.non-header-body-wrapper), & > .non-header-body-wrapper > * {
-    padding: $common-padding;
-  }
-
-  & > div {
-    // @include common-transitions-with-transform();
-  }
+  // & > *:not(.non-header-body-wrapper), & > .non-header-body-wrapper > * {
+  //   padding: $common-padding;
+  // }
 
   &.menu-active {
     padding-top: calc($body-top-padding + $body-offset-menu-active);
   }
 }
 
-#content {
-  @include responsive-widths();
-  margin: 0 auto;
+$content-container-vertical-padding: 3rem;
+
+@mixin content-container-padding {
+  padding-top: $content-container-vertical-padding;
+  padding-bottom: $content-container-vertical-padding;
 }
 
+.content-container {
+  @include common-transitions();
+  // do I want to set this here?
+  @include content-container-padding();
+  // background: blue;
+
+  &.container-alt-bg {
+    @include common-transitions();
+    background-color: map.get($themes, "light", "background-alt");
+
+    .dark & {
+      background-color: map.get($themes, "dark", "background-alt");
+    }
+  }
+}
+
+.content-wrapper {
+  @include common-transitions();
+  @include responsive-widths();
+  // background: red;
+  margin: 0 auto;
+  padding: $common-padding;
+}
+
+#page-content {
+  // margin: 0 auto;
+  width: 100vw;
+  
+  // background-color: purple;
+}
+
+
+
 // TODO: Do I want to use this?
-#content-controls {
+#page-controls {
   display: none;
   height: 100vh;
   left: 0;
@@ -690,34 +1010,40 @@ body {
   width: calc(100vw - 768px);
 }
 
+// ====================
+// ui component styling
+// ====================
 button {
   @include common-transitions();
-  
   background-color: transparent;
   border: $common-border solid map.get($themes, "light", "background-alt");
   border-radius: $common-border-radius;
-  color: map.get($themes, "light", "accent-color");
+  // color: map.get($themes, "light", "accent-color");
+  color: map.get($themes, "light", "text-color");
   font-family: $main-font;
   font-weight: bold;
   padding: .75rem 1rem;
-  
+    
   .dark & {
     border: $common-border solid map.get($themes, "dark", "background-alt");
-    color: map.get($themes, "dark", "accent-color");
+    // color: map.get($themes, "dark", "accent-color");
+    color: map.get($themes, "dark", "text-color");
   }
   
   &:hover {
     background-color: map.get($themes, "light", "background-alt");
     border-color: map.get($themes, "light", "background-alt");
     cursor: pointer;
-    color: map.get($themes, "light", "text-color");
-    
+    // color: map.get($themes, "light", "text-color");
+    color: map.get($themes, "light", "accent-color");
+  
     
     .dark & {
       background-color: map.get($themes, "dark", "background-alt");
       border-color: map.get($themes, "dark", "background-alt");
       cursor: pointer;
-      color: map.get($themes, "dark", "text-color");   
+      // color: map.get($themes, "dark", "text-color");
+      color: map.get($themes, "dark", "accent-color");
     }
   }
 
@@ -726,6 +1052,24 @@ button {
     filter: opacity(.8);
   }
 }
+
+.container-alt-bg button {
+  border: $common-border solid map.get($themes, "light", "background-color");
+
+  .dark & {
+    border: $common-border solid map.get($themes, "dark", "background-color");
+  }
+
+  &:hover {
+    background-color: map.get($themes, "light", "background-color");
+    border-color: $common-border solid map.get($themes, "light", "background-color");
+    
+    .dark & {
+      background-color: map.get($themes, "dark", "background-color");
+    }
+  }
+}
+
 
 // ==============
 // footer styling
@@ -738,7 +1082,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 2rem;
+  // margin-top: 2rem;
   text-align: center;
   width: 100%;
   

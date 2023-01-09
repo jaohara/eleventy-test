@@ -16,3 +16,43 @@
   <img src="{{src}}" alt="{{alt}}" class="zoomable-image"/>
 </div>
 {% endmacro %}
+
+{# Do I like this icon? Do I need an icon? #}
+{% macro dateTag(timeString)%}
+<span class="date-tag">
+  <span class="date-tag-icon">
+    {% feather "calendar" %}
+  </span>
+  <span class="date-tag-string">
+    {{timeString}}
+  </span>
+</span>
+{% endmacro %}
+
+{# does the name span highlighting look awful? #}
+{% macro hero()%}
+<div id="hero-container">
+  <canvas id="hero-background-canvas" class="hidden" width="400" height="300"></canvas>
+  <div id="hero-content-wrapper" class="hidden">
+    <div id="hero-intro">
+      <div id="hero-image-wrapper">
+        <img id="hero-image" src="assets/img/Headshot.webp" alt="John O'Hara Headshot" />
+      </div>    
+      <div id="hero-text">
+        <h1>Hi - I'm <span class="hero-name">John O'Hara</span>, a Seattle-based Developer.</h1>
+        <p>I make things for the web, primarily using tools such as React, JavaScript, TypeScript, and SCSS.</p>
+        <p>When I'm not working at my computer I enjoy riding bicycles, playing guitar, and putting way too much thought into coffee.</p>
+      </div>
+    </div>
+    <div id="hero-technology-container">
+      <div class="hero-technology-card javascript"><img class="hero-technology-image" src="assets/img/javascript-logo.png" /></div>
+      <div class="hero-technology-card typescript"><img class="hero-technology-image"src="assets/img/typescript-logo.svg" /></div>
+      <div class="hero-technology-card react"><img class="hero-technology-image" src="assets/img/react-logo.svg" /></div>
+      <div class="hero-technology-card sass"><img class="hero-technology-image" src="assets/img/sass-logo.svg" /></div>
+    </div>
+  </div>
+  <div id="hero-arrow">
+    {% feather "arrow-down-circle",  {"width": 64, "height": 64} %}  
+  </div>
+</div>
+{% endmacro %}

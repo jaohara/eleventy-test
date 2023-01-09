@@ -1,0 +1,16 @@
+{% extends "base.njk" %}
+
+{% block body %}
+
+<div id="hero">
+  <div id="hero-image-wrapper">
+    <img id="hero-image" src="assets/img/Headshot.webp" alt="John O'Hara Headshot" />
+  </div>
+  <div id="hero-image-wrapper">
+    {% block upper_third %}{% endblock %}
+  </div>
+</div>
+
+{% block project_section %}{% endblock %}
+
+{% endblock %}
